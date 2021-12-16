@@ -6,19 +6,17 @@ const ChatHeader = () => {
         bgColor='#AED2D0'
         w='full'
         p={2}
+        borderRadius={'lg'}
     >
-        <Flex>
+        <Flex justifyContent={'space-between'}>
             <Box>
-                <Text fontSize='12px'>Hi, I am OTTO</Text>
-                <Text fontSize='10px'>I can ask you questions, help your revise and test your knowledge.</Text>
-                <Text />
-                <Text fontSize='12px'>
+                <Text fontSize='14px'>Hi, I am OTTO</Text>
+                <Text fontSize='12px'>I can ask you questions, help your revise and test your knowledge.</Text>
+                <Text fontSize='15px' mt={2}>
                     You can start by putting link in the text box.
                 </Text>
             </Box>
-            <Box
-                w='100px'
-            >
+            <Box>
                 <Image objectFit='contain' src="/bot.svg" alt="bot image" />
             </Box>
         </Flex>
