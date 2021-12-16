@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Select, Text } from "@chakra-ui/react"
 
 const ChatHeader = () => {
 
@@ -20,6 +20,17 @@ const ChatHeader = () => {
                 <Image objectFit='contain' src="/bot.svg" alt="bot image" />
             </Box>
         </Flex>
+
+        <Box mt={2}>
+            <Select
+                placeholder="Select Question Type"
+                border={'2px solid'}
+            >
+                <option value={'boolean'}>Boolean</option>
+                <option value={'mcq'}>MCQ</option>
+                <option value={'short_question'}>Short Question</option>
+            </Select>
+        </Box>
     </Box>
 }
 

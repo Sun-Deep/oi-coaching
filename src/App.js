@@ -11,12 +11,12 @@ function App() {
       h='90vh'
       w='450px'
       mx={'auto'}
-      my={10}
+      my={5}
       borderRadius={'lg'}
     >
       <ChatHeader />
       <VStack
-        h='70vh'
+        h='63vh'
       >
 
       </VStack>
