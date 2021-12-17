@@ -51,8 +51,20 @@ function App() {
       <VStack
         h='63vh'
         p={2}
+        overflowY={'scroll'}
+        spacing={5}
       >
-        <QuestionCard question={'I am question one'} />
+        {
+          questions?.questions?.length > 0 && 
+          questions.questions.map((q, idx) => (
+            <QuestionCard 
+              key={idx}
+              question={q.question_statement}
+              options={q.options}
+              answer={q.answer}
+            />
+          ))
+        }
       </VStack>
       <TextBox 
         isLoading={isLoading} 
