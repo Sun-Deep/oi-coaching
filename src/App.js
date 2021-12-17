@@ -1,6 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ChatHeader from "./components/ChatHeader";
+import QuestionCard from "./components/QuestionCard";
 import TextBox from "./components/TextBox";
 import { postMCQ } from "./services/questions";
 
@@ -49,8 +50,9 @@ function App() {
       <ChatHeader handleQuestionType={handleQuestionType} />
       <VStack
         h='63vh'
+        p={2}
       >
-
+        <QuestionCard question={'I am question one'} />
       </VStack>
       <TextBox 
         isLoading={isLoading} 
