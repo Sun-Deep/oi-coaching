@@ -1,4 +1,4 @@
-import { Box, VStack } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ChatBubble from "./components/ChatBubble";
 import ChatHeader from "./components/ChatHeader";
@@ -15,13 +15,14 @@ function App() {
     '',
     'Hi, I am OTTO',
     'I can ask you questions, help your revise and test your knowledge.',
-    'You can start by selecting question type and putting link in the text box.'
+    'You can start by selecting question type from top and putting link in the text box.'
   ])
   const [convStarterIndex, setConvStarterIndex] = useState(0)
   const [questionType, setQuestionType] = useState('')
   const [inputText, setInputText] = useState('')
   const [questions, setQuestions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [isReport, setIsReport] = useState(false)
 
   useEffect(() => {
     if(convStarterIndex < 3){
@@ -65,7 +66,6 @@ function App() {
   
   return (
     <Box
-      // bgColor='blackAlpha.100'
       boxShadow={'md'}
       h='90vh'
       w='450px'
@@ -73,67 +73,79 @@ function App() {
       my={5}
       borderRadius={'lg'}
     >
-      <ChatHeader handleQuestionType={handleQuestionType} />
-      <VStack
-        h='63vh'
-        p={2}
-        overflowY={'scroll'}
-        spacing={5}
-        w='full'
-      >
-        <VStack
-          spacing={2}
-          align={'flex-start'}
-          w='full'
-          // marginLeft={'-40px'}
-        >
-        {
-          convStarterIndex > 0 && <ChatBubble text={convStarter[1]} />
-        }
+      <Box>
+          <ChatHeader handleQuestionType={handleQuestionType} />
+          <VStack
+            h='63vh'
+            p={2}
+            overflowY={'scroll'}
+            spacing={5}
+            w='full'
+          >
+            <VStack
+              spacing={2}
+              align={'flex-start'}
+              w='full'
+              // marginLeft={'-40px'}
+            >
+            {
+              convStarterIndex > 0 && <ChatBubble text={convStarter[1]} />
+            }
 
-        {
-          convStarterIndex > 1 && <ChatBubble text={convStarter[2]} />
-        }
+            {
+              convStarterIndex > 1 && <ChatBubble text={convStarter[2]} />
+            }
 
-        {
-          convStarterIndex > 2 && <ChatBubble text={convStarter[3]} />
-        }
+            {
+              convStarterIndex > 2 && <ChatBubble text={convStarter[3]} />
+            }
 
-        {
-          convStarterIndex < 3 &&  <ChatLoading />
-        }
-      </VStack>
-       
-        {
-          questionType === 'mcq' && questions?.questions?.length > 0 && 
-          questions.questions.map((q, idx) => (
-            <QuestionCardMCQ
-              key={idx}
-              question={q.question_statement}
-              options={q.options}
-              answer={q.answer}
-            />
-          ))
-        }
+            {
+              convStarterIndex < 3 &&  <ChatLoading />
+            }
+          </VStack>
+          
+            {
+              questionType === 'mcq' && questions?.questions?.length > 0 && 
+              questions.questions.map((q, idx) => (
+                <QuestionCardMCQ
+                  key={idx}
+                  question={q.question_statement}
+                  options={q.options}
+                  answer={q.answer}
+                />
+              ))
+            }
 
-        {
-          questionType === 'short_question' && questions?.questions?.length > 0 &&
-          questions.questions.map((q) => (
-            <QuestionCardShort 
-              key={q.id}
-              question={q.Question}
-              answer={q.Answer}
-            />
-          ))
-        }
-      </VStack>
-      <TextBox 
-        isLoading={isLoading} 
-        getQuestion={getQuestion} 
-        handleInputText={handleInputText}
-        inputText={inputText}
-      />
-    </Box>
+            {
+              questionType === 'short_question' && questions?.questions?.length > 0 &&
+              questions.questions.map((q) => (
+                <QuestionCardShort 
+                  key={q.id}
+                  question={q.Question}
+                  answer={q.Answer}
+                />
+              ))
+            }
+          </VStack>
+          <TextBox 
+            isLoading={isLoading} 
+            getQuestion={getQuestion} 
+            handleInputText={handleInputText}
+            inputText={inputText}
+          />
+
+          <Button
+            size={'sm'}
+            bgColor={'#4dd4b9'}
+            color={'black'}
+            boxShadow={'lg'}
+            ml={2}
+          >
+            Show Report
+          </Button>
+        </Box>
+      </Box>
   );
 }
 
