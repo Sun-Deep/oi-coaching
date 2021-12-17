@@ -15,6 +15,8 @@ function App() {
 
   const handleQuestionType = (event) => {
     setQuestionType(event.target.value)
+    setQuestions([])
+    setInputText('')
   }
 
   const handleInputText = (event) => {
@@ -69,7 +71,8 @@ function App() {
       <TextBox 
         isLoading={isLoading} 
         getQuestion={getQuestion} 
-        handleInputText={handleInputText} 
+        handleInputText={handleInputText}
+        inputText={inputText}
       />
     </Box>
   );
