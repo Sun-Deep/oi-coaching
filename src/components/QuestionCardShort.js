@@ -20,8 +20,8 @@ const QuestionCardShort = ({ question, options, answer }) => {
         spacing={2}
         w='full'
         border={
-            selectedAns === answer ? '2px solid green'
-            : (selectedAns !== '' && selectedAns !== answer) ? '2px solid red'
+            selectedAns === answer ? '3px solid green'
+            : (selectedAns !== '' && selectedAns !== answer) ? '3px solid red'
             : ''
         }
     >

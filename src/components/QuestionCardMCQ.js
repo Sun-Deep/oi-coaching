@@ -16,8 +16,8 @@ const QuestionCard = ({ question, options, answer }) => {
         spacing={2}
         w='full'
         border={
-            selectedAns === answer ? '2px solid green'
-            : (selectedAns !== '' && selectedAns !== answer) ? '2px solid red'
+            selectedAns === answer ? '3px solid green'
+            : (selectedAns !== '' && selectedAns !== answer) ? '3px solid red'
             : ''
         }
     >
@@ -36,6 +36,14 @@ const QuestionCard = ({ question, options, answer }) => {
                 </Button>
             ))
         }
+        <Button
+         w='full'
+         size={'sm'}
+         onClick={() => setAnswer(answer)}
+         textTransform={'capitalize'}
+        >
+            {answer}
+        </Button>
     </VStack>
 }
 
