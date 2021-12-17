@@ -1,9 +1,16 @@
 import { Box, VStack } from "@chakra-ui/react";
+import { useEffect } from "react";
 import ChatHeader from "./components/ChatHeader";
 import TextBox from "./components/TextBox";
+import { postBoolean } from "./services/questions";
 
 
 function App() {
+
+  useEffect(() => {
+    postBoolean()
+  }, [])
+  
   return (
     <Box
       // bgColor='blackAlpha.100'
