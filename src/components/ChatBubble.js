@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react"
 
 const ChatBubble = ({text}) => {
     return <Box
-        bgColor={'#4dd4b9'}
+        bgColor={'#b6c7c3'}
         p={2}
         fontSize={'12px'}
         boxShadow={'md'}
