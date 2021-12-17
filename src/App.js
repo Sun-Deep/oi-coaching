@@ -1,7 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChatHeader from "./components/ChatHeader";
-import QuestionCard from "./components/QuestionCard";
+import QuestionCardMCQ from "./components/QuestionCardMCQ";
 import TextBox from "./components/TextBox";
 import { postMCQ } from "./services/questions";
 
@@ -57,9 +57,9 @@ function App() {
         spacing={5}
       >
         {
-          questions?.questions?.length > 0 && 
+          questionType === 'mcq' && questions?.questions?.length > 0 && 
           questions.questions.map((q, idx) => (
-            <QuestionCard 
+            <QuestionCardMCQ
               key={idx}
               question={q.question_statement}
               options={q.options}
