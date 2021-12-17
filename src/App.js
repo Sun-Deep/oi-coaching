@@ -2,20 +2,39 @@ import { Box, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ChatHeader from "./components/ChatHeader";
 import TextBox from "./components/TextBox";
-import { postBoolean } from "./services/questions";
+import { postMCQ } from "./services/questions";
 
 
 function App() {
 
   const [questionType, setQuestionType] = useState('')
+  const [inputText, setInputText] = useState('')
+  const [questions, setQuestions] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleQuestionType = (event) => {
     setQuestionType(event.target.value)
   }
 
-  useEffect(() => {
-    postBoolean('If an object remains a magnet even when removed from the other magnetic field it is called a permanent magnet. If alignment is made in the presence of a permanent magnetic field, the object is a temporary magnet. If the material is not magnetized in the presence of another magnetic field because the domains are randomly organized so that the north and south poles do not line up and often cancel each other it is non-magnetic.')
-  }, [])
+  const handleInputText = (event) => {
+    setInputText(event.target.value)
+  }
+
+  console.log(questions)
+  console.log(questionType)
+  console.log(inputText)
+
+  const getQuestion = () => {
+    setIsLoading(true)
+    if(questionType === 'boolean'){
+
+    }else if(questionType === 'mcq'){
+      postMCQ(inputText).then((response) => {
+        setQuestions(response.data)
+        setIsLoading(false)
+      })
+    }
+  }
   
   return (
     <Box
@@ -33,7 +52,11 @@ function App() {
       >
 
       </VStack>
-      <TextBox />
+      <TextBox 
+        isLoading={isLoading} 
+        getQuestion={getQuestion} 
+        handleInputText={handleInputText} 
+      />
     </Box>
   );
 }
