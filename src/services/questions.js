@@ -14,7 +14,7 @@ export const postMCQ = async (text) => {
 
 export const postShortQuestion = async (text) => {
     const res = await axios.post(
-        `${API}/get_short`,
+        `${API}/get_short_question`,
         {
             input_text: text
         }
