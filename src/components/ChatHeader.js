@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Image, Select, Text } from "@chakra-ui/react"
 
-const ChatHeader = ({handleQuestionType }) => {
+const ChatHeader = ({handleQuestionType, questionType }) => {
 
     return <Box
         bgColor='#4dd4b9'
@@ -26,6 +26,7 @@ const ChatHeader = ({handleQuestionType }) => {
                 placeholder="Select Question Type"
                 border={'2px solid'}
                 onChange={handleQuestionType}
+                value={questionType}
             >
                 <option value={'boolean'}>Boolean</option>
                 <option value={'mcq'}>MCQ</option>

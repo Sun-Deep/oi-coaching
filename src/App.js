@@ -71,7 +71,7 @@ function App() {
   return (
     <Box
       boxShadow={'md'}
-      h='90vh'
+      h='92vh'
       w='450px'
       mx={'auto'}
       my={5}
@@ -79,7 +79,7 @@ function App() {
     >
       {
         !isReport ? <Box>
-        <ChatHeader handleQuestionType={handleQuestionType} />
+        <ChatHeader questionType={questionType} handleQuestionType={handleQuestionType} />
         <VStack
           h='63vh'
           p={2}
