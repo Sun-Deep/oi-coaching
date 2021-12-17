@@ -1,6 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import ChatHeader from "./components/ChatHeader";
+import ChatLoading from "./components/ChatLoading";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
 import QuestionCardShort from "./components/QuestionCardShort";
 import TextBox from "./components/TextBox";
@@ -62,6 +63,7 @@ function App() {
         overflowY={'scroll'}
         spacing={5}
       >
+        <ChatLoading />
         {
           questionType === 'mcq' && questions?.questions?.length > 0 && 
           questions.questions.map((q, idx) => (
