@@ -1,5 +1,6 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import ChatBubble from "./components/ChatBubble";
 import ChatHeader from "./components/ChatHeader";
 import ChatLoading from "./components/ChatLoading";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
@@ -10,6 +11,12 @@ import { postMCQ, postShortQuestion } from "./services/questions";
 
 function App() {
 
+  const [convStarter, setConvStarter] = useState([
+    'Hi, I am OTTO',
+    'I can ask you questions, help your revise and test your knowledge.',
+    'You can start by putting link in the text box.'
+  ])
+  const [convStarterIndex, setConvStarterIndex] = useState(0)
   const [questionType, setQuestionType] = useState('')
   const [inputText, setInputText] = useState('')
   const [questions, setQuestions] = useState([])
@@ -64,6 +71,7 @@ function App() {
         spacing={5}
       >
         <ChatLoading />
+        <ChatBubble text={convStarter[0]} />
         {
           questionType === 'mcq' && questions?.questions?.length > 0 && 
           questions.questions.map((q, idx) => (
