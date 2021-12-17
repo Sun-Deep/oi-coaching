@@ -2,8 +2,9 @@ import { Box, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import ChatHeader from "./components/ChatHeader";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
+import QuestionCardShort from "./components/QuestionCardShort";
 import TextBox from "./components/TextBox";
-import { postMCQ } from "./services/questions";
+import { postMCQ, postShortQuestion } from "./services/questions";
 
 
 function App() {
@@ -36,6 +37,11 @@ function App() {
         setQuestions(response.data)
         setIsLoading(false)
       })
+    }else if(questionType === 'short_question'){
+      postShortQuestion(inputText).then(response => {
+        setQuestions(response.data)
+        setIsLoading(false)
+      })
     }
   }
   
@@ -64,6 +70,17 @@ function App() {
               question={q.question_statement}
               options={q.options}
               answer={q.answer}
+            />
+          ))
+        }
+
+        {
+          questionType === 'short_question' && questions?.questions?.length > 0 &&
+          questions.questions.map((q) => (
+            <QuestionCardShort 
+              key={q.id}
+              question={q.Question}
+              answer={q.Answer}
             />
           ))
         }
