@@ -19,7 +19,7 @@ const ChatHeader = ({handleQuestionType, questionType }) => {
                 </Text> */}
             </Box>
             <Box>
-                <Image w='40px' objectFit='contain' src="/bot.svg" alt="bot image" />
+                <Image w='60px' objectFit='contain' src="/bot.svg" alt="bot image" />
             </Box>
         </Flex>
 
