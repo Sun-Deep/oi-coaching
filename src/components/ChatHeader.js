@@ -3,7 +3,9 @@ import { Box, Flex, Heading, Image, Select, Text } from "@chakra-ui/react"
 const ChatHeader = ({handleQuestionType, questionType }) => {
 
     return <Box
-        bgColor='#4dd4b9'
+        bg= '#1CD8D2'
+        bg='-webkit-linear-gradient(to right, #93EDC7, #1CD8D2)'
+        bg='linear-gradient(to right, #93EDC7, #1CD8D2)'
         w='full'
         p={2}
         borderRadius={'lg'}

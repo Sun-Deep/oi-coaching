@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Image, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
@@ -17,7 +17,7 @@ function App() {
 
   const [convStarter, setConvStarter] = useState([
     '',
-    'Hi, I am OTTO',
+    'Hi, I am OTTO. Your friend and personal learning partner.',
     'I can ask you questions, help your revise and test your knowledge.',
     'You can start by selecting question type from top and putting link in the text box.'
   ])
@@ -77,6 +77,9 @@ function App() {
       my={5}
       borderRadius={'lg'}
     >
+       <Box w='250px' pos={'absolute'} top={0} left={10}>
+        <Image objectFit={'contain'} src="/logo.png" />
+      </Box>
       {
         !isReport ? <Box>
         <ChatHeader questionType={questionType} handleQuestionType={handleQuestionType} />
