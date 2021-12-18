@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Image, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Image, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
@@ -71,15 +71,13 @@ function App() {
   return (
     <Box
       boxShadow={'md'}
-      h='93vh'
+      h='92vh'
       w='450px'
       mx={'auto'}
       my={5}
       borderRadius={'lg'}
+      pos={'relative'}
     >
-       <Box w='250px' pos={'absolute'} top={0} left={10}>
-        <Image objectFit={'contain'} src="/logo.png" />
-      </Box>
       {
         !isReport ? <Box>
         <ChatHeader questionType={questionType} handleQuestionType={handleQuestionType} />
@@ -136,6 +134,7 @@ function App() {
             ))
           }
         </VStack>
+        <Box pos={'absolute'} bottom={2} w='full'>
         <TextBox 
           isLoading={isLoading} 
           getQuestion={getQuestion} 
@@ -153,6 +152,8 @@ function App() {
         >
           Show Report
         </Button>
+        </Box>
+        
       </Box> :
       <Box w='100%'>
          <Icon m={2} w={10} h={10} as={HiArrowLeft} color={'#4dd4b9'} onClick={() => setIsReport(false)} />
