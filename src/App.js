@@ -71,7 +71,7 @@ function App() {
   return (
     <Box
       boxShadow={'md'}
-      h='92vh'
+      h='93vh'
       w='450px'
       mx={'auto'}
       my={5}
