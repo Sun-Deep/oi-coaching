@@ -30,7 +30,7 @@ const ChatHeader = ({handleQuestionType, questionType }) => {
                 onChange={handleQuestionType}
                 value={questionType}
             >
-                <option value={'boolean'}>Boolean</option>
+                <option value={'boolean'}>Boolean (True or False)</option>
                 <option value={'mcq'}>MCQ</option>
                 <option value={'short_question'}>Short Question</option>
             </Select>
