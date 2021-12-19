@@ -19,7 +19,8 @@ function App() {
     '',
     'Hi, I am OTTO. Your friend and personal learning partner.',
     'I can ask you questions, help your revise and test your knowledge.',
-    'You can start by selecting question type from top and putting link in the text box.'
+    'You can start by selecting a question type from the top.',
+    'And paste  the link or the text of your learning material into the text box below.'
   ])
   const [convStarterIndex, setConvStarterIndex] = useState(0)
   const [questionType, setQuestionType] = useState('')
@@ -29,7 +30,7 @@ function App() {
   const [isReport, setIsReport] = useState(false)
 
   useEffect(() => {
-    if(convStarterIndex < 3){
+    if(convStarterIndex < 4){
       setTimeout(() => {
         setConvStarterIndex(idx => idx + 1)
       }, 2000)
@@ -107,7 +108,11 @@ function App() {
           }
 
           {
-            convStarterIndex < 3 &&  <ChatLoading />
+            convStarterIndex > 3 && <ChatBubble text={convStarter[4]} />
+          }
+
+          {
+            convStarterIndex < 4 &&  <ChatLoading />
           }
         </VStack>
         

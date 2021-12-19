@@ -13,10 +13,6 @@ const ChatHeader = ({handleQuestionType, questionType }) => {
         <Flex justifyContent={'space-between'}>
             <Box>
                 <Heading>OTTO</Heading>
-                {/* <Text fontSize='12px'>I can ask you questions, help your revise and test your knowledge.</Text>
-                <Text fontSize='15px' mt={2}>
-                    You can start by putting link in the text box.
-                </Text> */}
             </Box>
             <Box>
                 <Image w='60px' objectFit='contain' src="/bot.svg" alt="bot image" />
