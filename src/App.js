@@ -12,6 +12,7 @@ import TextBox from "./components/TextBox";
 import { postBoolean, postMCQ, postShortQuestion } from "./services/questions";
 import bar from "./mockup/bar";
 import QuestionCardBoolean from "./components/QuestionCardBoolean";
+import shuffleArray from "./helper/shuffleArray";
 
 
 function App() {
@@ -126,7 +127,7 @@ function App() {
               <QuestionCardMCQ
                 key={idx}
                 question={q.question_statement}
-                options={q.options}
+                options={shuffleArray([...q['options'], q.answer])}
                 answer={q.answer}
               />
             ))

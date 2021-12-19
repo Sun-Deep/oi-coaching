@@ -49,20 +49,21 @@ const QuestionCard = ({ question, options, answer }) => {
                     w='full'
                     size={'sm'}
                     key={idx}
+                    textTransform={'capitalize'}
                     onClick={() => setAnswer(op)}
                 >
                     {op}
                 </Button>
             ))
         }
-        <Button
+        {/* <Button
          w='full'
          size={'sm'}
          onClick={() => setAnswer(answer)}
          textTransform={'capitalize'}
         >
             {answer}
-        </Button>
+        </Button> */}
     </VStack>
 }
 
