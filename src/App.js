@@ -9,8 +9,9 @@ import ChatLoading from "./components/ChatLoading";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
 import QuestionCardShort from "./components/QuestionCardShort";
 import TextBox from "./components/TextBox";
-import { postMCQ, postShortQuestion } from "./services/questions";
+import { postBoolean, postMCQ, postShortQuestion } from "./services/questions";
 import bar from "./mockup/bar";
+import QuestionCardBoolean from "./components/QuestionCardBoolean";
 
 
 function App() {
@@ -55,7 +56,10 @@ function App() {
   const getQuestion = () => {
     setIsLoading(true)
     if(questionType === 'boolean'){
-
+      postBoolean(inputText).then(response => {
+        setQuestions(response.data)
+        setIsLoading(false)
+      })
     }else if(questionType === 'mcq'){
       postMCQ(inputText).then((response) => {
         setQuestions(response.data)
@@ -135,6 +139,17 @@ function App() {
                 key={q.id}
                 question={q.Question}
                 answer={q.Answer}
+              />
+            ))
+          }
+
+          {
+            questionType === 'boolean' && questions?.questions?.length > 0 &&
+            questions.questions.map((q, idx) => (
+              <QuestionCardBoolean
+                key={idx}
+                question={q}
+                answer={questions['answers'][idx]}
               />
             ))
           }
