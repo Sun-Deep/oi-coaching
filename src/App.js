@@ -87,7 +87,7 @@ function App() {
         !isReport ? <Box>
         <ChatHeader questionType={questionType} handleQuestionType={handleQuestionType} />
         <VStack
-          h='63vh'
+          h='60vh'
           p={2}
           overflowY={'scroll'}
           spacing={5}
