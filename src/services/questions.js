@@ -21,3 +21,13 @@ export const postShortQuestion = async (text) => {
     )
     return res
 }
+
+export const postBoolean = async (text) => {
+    const res = await axios.post(
+        `${API}/get_bool`,
+        {
+            input_text: text
+        }
+    )
+    return res
+}
