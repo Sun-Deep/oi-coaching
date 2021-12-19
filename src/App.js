@@ -77,10 +77,9 @@ function App() {
   return (
     <Box
       boxShadow={'md'}
-      h='92vh'
+      h='670px'
       w='450px'
       mx={'auto'}
-      my={5}
       borderRadius={'lg'}
       pos={'relative'}
     >
@@ -88,7 +87,7 @@ function App() {
         !isReport ? <Box>
         <ChatHeader questionType={questionType} handleQuestionType={handleQuestionType} />
         <VStack
-          h='60vh'
+          h='444px'
           p={2}
           overflowY={'scroll'}
           spacing={5}

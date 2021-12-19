@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Box, ChakraProvider, Image, Text } from '@chakra-ui/react'
+import { Box, ChakraProvider, Flex, Image, Text } from '@chakra-ui/react'
 
 import './index.css';
 import App from './App';
@@ -12,11 +12,16 @@ ReactDOM.render(
     <Box display={['none', 'none', 'none', 'block']} w='250px' pos={'absolute'} top={0} left={10}>
         <Image objectFit={'contain'} src="/logo.png" />
       </Box>
+      <Flex mx={2} h='100vh' alignItems={'center'}>
       <App />
+      </Flex>
+     
       <Text
         color={'gray'}
         fontSize="10px"
-        textAlign={'right'}
+        pos={'absolute'}
+        right={2}
+        bottom={2}
       >
         Confindential. Do Not Share. All IP belongs to Otermans Institute 2021.
       </Text>
