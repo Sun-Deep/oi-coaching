@@ -1,8 +1,8 @@
 import { Button, Flex, Input, Text, VStack } from "@chakra-ui/react"
-import { useRef } from "react"
-import { useState } from "react/cjs/react.development"
+import Swal from 'sweetalert2'
+import { useRef, useState } from "react"
 
-const QuestionCardShort = ({ question, options, answer }) => {
+const QuestionCardShort = ({ question, answer }) => {
 
     const [selectedAns, setSelectedAns] = useState('')
 
@@ -10,6 +10,23 @@ const QuestionCardShort = ({ question, options, answer }) => {
 
     const setAnswer = () => {
         setSelectedAns(ansRef.current.value)
+        if(ansRef.current.value === answer){
+            Swal.fire({
+                icon: 'success',
+                title: 'Well Done!',
+                showConfirmButton: false,
+                timer: 1500,
+                width: '320px'
+              })
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Try Again!',
+                showConfirmButton: false,
+                timer: 1500,
+                width: '320px'
+              })
+        }
     }
 
 

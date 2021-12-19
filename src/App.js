@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
