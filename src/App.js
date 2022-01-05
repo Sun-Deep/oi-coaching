@@ -9,7 +9,7 @@ import ChatLoading from "./components/ChatLoading";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
 import QuestionCardShort from "./components/QuestionCardShort";
 import TextBox from "./components/TextBox";
-import { postBoolean, postMCQ, postShortQuestion } from "./services/questions";
+import { getResponse, postBoolean, postMCQ, postShortQuestion } from "./services/questions";
 import bar from "./mockup/bar";
 import QuestionCardBoolean from "./components/QuestionCardBoolean";
 import shuffleArray from "./helper/shuffleArray";
@@ -24,6 +24,8 @@ function App() {
   //   'You can start by selecting a question type from the top.',
   //   'And paste  the link or the text of your learning material into the text box below.'
   // ])
+
+  const [chats, setChats] = useState([])
   // const [convStarterIndex, setConvStarterIndex] = useState(0)
   const [questionType, setQuestionType] = useState('')
   const [inputText, setInputText] = useState('')
@@ -52,22 +54,34 @@ function App() {
 
   const getQuestion = () => {
     setIsLoading(true)
-    if(questionType === 'boolean'){
-      postBoolean(inputText).then(response => {
-        setQuestions(response.data)
+    setChats([...chats, { sent: inputText}])
+    getResponse(inputText).then(res => {
+      if(res?.data?.paragraph){
         setIsLoading(false)
-      })
-    }else if(questionType === 'mcq'){
-      postMCQ(inputText).then((response) => {
-        setQuestions(response.data)
+
+      }else{
+        setChats([...chats, {sent: inputText}, { received: res?.data?.response}])
         setIsLoading(false)
-      })
-    }else if(questionType === 'short_question'){
-      postShortQuestion(inputText).then(response => {
-        setQuestions(response.data)
-        setIsLoading(false)
-      })
-    }
+
+      }
+      setInputText('')
+    })
+    // if(questionType === 'boolean'){
+    //   postBoolean(inputText).then(response => {
+    //     setQuestions(response.data)
+    //     setIsLoading(false)
+    //   })
+    // }else if(questionType === 'mcq'){
+    //   postMCQ(inputText).then((response) => {
+    //     setQuestions(response.data)
+    //     setIsLoading(false)
+    //   })
+    // }else if(questionType === 'short_question'){
+    //   postShortQuestion(inputText).then(response => {
+    //     setQuestions(response.data)
+    //     setIsLoading(false)
+    //   })
+    // }
   }
   
   return (
@@ -89,31 +103,19 @@ function App() {
           spacing={5}
           w='full'
         >
-          {/* <VStack
+          <VStack
             spacing={2}
             align={'flex-start'}
-            w='full'
+            w={'full'}
           >
-          {
-            convStarterIndex > 0 && <ChatBubble text={convStarter[1]} />
-          }
-
-          {
-            convStarterIndex > 1 && <ChatBubble text={convStarter[2]} />
-          }
-
-          {
-            convStarterIndex > 2 && <ChatBubble text={convStarter[3]} />
-          }
-
-          {
-            convStarterIndex > 3 && <ChatBubble text={convStarter[4]} />
-          }
-
-          {
-            convStarterIndex < 4 &&  <ChatLoading />
-          }
-        </VStack> */}
+            {
+              chats.length > 0 && chats.map((c, idx) => (
+               !!c.sent ?  <ChatBubble alignSelf='flex-end' key={idx} text={c.sent} /> :
+                <ChatBubble key={idx} text={c.received} />
+              ))
+            }
+            { isLoading && <ChatLoading />}
+          </VStack>
         
           {
             questionType === 'mcq' && questions?.questions?.length > 0 && 
@@ -151,7 +153,7 @@ function App() {
         </VStack>
         <Box pos={'absolute'} bottom={2} w='full'>
         <TextBox 
-          isLoading={isLoading} 
+          // isLoading={isLoading} 
           getQuestion={getQuestion} 
           handleInputText={handleInputText}
           inputText={inputText}

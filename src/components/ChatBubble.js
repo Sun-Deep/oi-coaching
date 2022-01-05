@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 
-const ChatBubble = ({text}) => {
+const ChatBubble = ({text, ...otherProps}) => {
     return <Box
         // bg={'radial-gradient(circle, #1c816c 0%, #3aad96 95%)'}
         bg='rgb(78,166,86)'
@@ -12,6 +12,7 @@ const ChatBubble = ({text}) => {
         boxShadow={'md'}
         borderRadius="25px"
         borderBottomLeftRadius="0px"
+        {...otherProps}
     >
         {text}
     </Box>
