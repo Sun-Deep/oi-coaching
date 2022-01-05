@@ -17,28 +17,28 @@ import shuffleArray from "./helper/shuffleArray";
 
 function App() {
 
-  const [convStarter, setConvStarter] = useState([
-    '',
-    'Hi, I am OTTO. Your friend and personal learning partner.',
-    'I can ask you questions, help your revise and test your knowledge.',
-    'You can start by selecting a question type from the top.',
-    'And paste  the link or the text of your learning material into the text box below.'
-  ])
-  const [convStarterIndex, setConvStarterIndex] = useState(0)
+  // const [convStarter, setConvStarter] = useState([
+  //   '',
+  //   'Hi, I am OTTO. Your friend and personal learning partner.',
+  //   'I can ask you questions, help your revise and test your knowledge.',
+  //   'You can start by selecting a question type from the top.',
+  //   'And paste  the link or the text of your learning material into the text box below.'
+  // ])
+  // const [convStarterIndex, setConvStarterIndex] = useState(0)
   const [questionType, setQuestionType] = useState('')
   const [inputText, setInputText] = useState('')
   const [questions, setQuestions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isReport, setIsReport] = useState(false)
 
-  useEffect(() => {
-    if(convStarterIndex < 4){
-      setTimeout(() => {
-        setConvStarterIndex(idx => idx + 1)
-      }, 2000)
-    }
+  // useEffect(() => {
+  //   if(convStarterIndex < 4){
+  //     setTimeout(() => {
+  //       setConvStarterIndex(idx => idx + 1)
+  //     }, 2000)
+  //   }
     
-  }, [convStarterIndex])
+  // }, [convStarterIndex])
 
   const handleQuestionType = (event) => {
     setQuestionType(event.target.value)
@@ -49,10 +49,6 @@ function App() {
   const handleInputText = (event) => {
     setInputText(event.target.value)
   }
-
-  console.log(questions)
-  console.log(questionType)
-  console.log(inputText)
 
   const getQuestion = () => {
     setIsLoading(true)
@@ -93,11 +89,10 @@ function App() {
           spacing={5}
           w='full'
         >
-          <VStack
+          {/* <VStack
             spacing={2}
             align={'flex-start'}
             w='full'
-            // marginLeft={'-40px'}
           >
           {
             convStarterIndex > 0 && <ChatBubble text={convStarter[1]} />
@@ -118,7 +113,7 @@ function App() {
           {
             convStarterIndex < 4 &&  <ChatLoading />
           }
-        </VStack>
+        </VStack> */}
         
           {
             questionType === 'mcq' && questions?.questions?.length > 0 && 
