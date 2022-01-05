@@ -52,7 +52,10 @@ function App() {
     setInputText(event.target.value)
   }
 
-  const getQuestion = () => {
+  const getQuestion = (event) => {
+    if(event){
+      event.preventDefault()
+    }
     setIsLoading(true)
     setChats([...chats, { sent: inputText}])
     getResponse(inputText).then(res => {

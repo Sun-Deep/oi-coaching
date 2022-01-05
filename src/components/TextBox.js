@@ -5,13 +5,16 @@ const TextBox = ({ handleInputText, getQuestion, isLoading, inputText }) => {
 
     return <Flex p={2} alignItems={'center'} gridGap={3}>
         <FormControl isRequired>
-            <Input 
-                borderRadius={'lg'}
-                border={'1px solid'}
-                borderColor={'#00B589'}
-                onChange={handleInputText}
-                value={inputText}
-            />
+            <form onSubmit={getQuestion}>
+                <Input 
+                    borderRadius={'lg'}
+                    border={'1px solid'}
+                    borderColor={'#00B589'}
+                    onChange={handleInputText}
+                    value={inputText}
+                />
+            </form>
+
         </FormControl>
         {
             isLoading ? <Spinner color='#00B589' /> : <Icon 
