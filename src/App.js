@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
 
-import ChatBubble from "./components/ChatBubble";
+import ChatBubble, { ChatBubbleReceived, ChatBubbleSent } from "./components/ChatBubble";
 import ChatHeader from "./components/ChatHeader";
 import ChatLoading from "./components/ChatLoading";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
@@ -110,8 +110,8 @@ function App() {
           >
             {
               chats.length > 0 && chats.map((c, idx) => (
-               !!c.sent ?  <ChatBubble alignSelf='flex-end' key={idx} text={c.sent} /> :
-                <ChatBubble key={idx} text={c.received} />
+               !!c.sent ?  <ChatBubbleSent key={idx} text={c.sent} /> :
+                <ChatBubbleReceived key={idx} text={c.received} />
               ))
             }
             { isLoading && <ChatLoading />}
