@@ -31,3 +31,13 @@ export const postBoolean = async (text) => {
     )
     return res
 }
+
+export const getResponse = async (text) => {
+    const res = await axios.post(
+        `${API}/get_response`,
+        {
+            user_input: text
+        }
+    )
+    return res
+}
