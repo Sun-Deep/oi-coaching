@@ -19,7 +19,7 @@ const ChatHeader = ({handleQuestionType, questionType }) => {
             </Box>
         </Flex>
 
-        <Box mt={2}>
+        {/* <Box mt={2}>
             <Select
                 placeholder="Select Question Type"
                 border={'2px solid'}
@@ -30,7 +30,7 @@ const ChatHeader = ({handleQuestionType, questionType }) => {
                 <option value={'mcq'}>MCQ</option>
                 <option value={'short_question'}>Short Question</option>
             </Select>
-        </Box>
+        </Box> */}
     </Box>
 }
 
