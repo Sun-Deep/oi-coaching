@@ -6,10 +6,11 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
 
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
-
+    const [attempt, setAttempt] = useState(0)
     const ansRef = useRef()
 
     const setAnswer = () => {
+        setAttempt(attempt => attempt + 1)
         setSelectedAns(ansRef.current.value)
         if(!isAnswered){
             setQuestionCounter(c => c + 1)
@@ -62,9 +63,11 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
             </Button>
         </Flex>
 
-          
-
-            
+        {
+            attempt >= 3 &&  <Text color={'gray'} as='small'>
+               Answer: {answer}
+            </Text>
+        }
 
     </VStack>
 }
