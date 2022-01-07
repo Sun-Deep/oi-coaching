@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
 
-import ChatBubble, { ChatBubbleReceived, ChatBubbleSent } from "./components/ChatBubble";
+import { ChatBubbleReceived, ChatBubbleSent } from "./components/ChatBubble";
 import ChatHeader from "./components/ChatHeader";
 import ChatLoading from "./components/ChatLoading";
 import QuestionCardMCQ from "./components/QuestionCardMCQ";
@@ -126,7 +126,7 @@ console.log({totalQuestions})
     >
       {
         !isReport ? <Box>
-        <ChatHeader questionType={questionType} handleQuestionType={handleQuestionType} />
+        <ChatHeader />
         <VStack
           h='444px'
           p={2}
