@@ -75,6 +75,7 @@ function App() {
 
   const getQuestions = (questionType) => {
     if(paraIndex <= paragraphs.length){
+      
       if(questionType === 'boolean'){
         postBoolean(paragraphs[paraIndex]).then(res => {
           setIsLoading(false)
@@ -96,6 +97,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(questions)
     if(totalQuestions > 0){
       let per = (questionCounter / (totalQuestions))
       console.log({per})
@@ -167,42 +169,38 @@ console.log({totalQuestions})
               }
             })
           }
-        
-          {/* {
-           questionType === 'mcq' &&  questions?.questions?.length > 0 && 
-            questions.questions.map((q, idx) => (
-              <QuestionCardMCQ
-                key={idx}
-                question={q.question_statement}
-                options={shuffleArray([...q['options'], q.answer])}
-                answer={q.answer}
-                setQuestionCounter={setQuestionCounter}
-              />
-            ))
-          } */}
+
 
           {
-           questionType === 'short_question' &&  questions?.questions?.length > 0 &&
-            questions.questions.map((q) => (
-              <QuestionCardShort 
-                key={q.id}
-                question={q.Question}
-                answer={q.Answer}
-                setQuestionCounter={setQuestionCounter}
-              />
-            ))
+            questionType === 'short_question' && questions.length > 0 &&
+            questions.map(ques => {
+              if(ques?.questions?.length > 0){
+                return ques.questions.map((q) => (
+                  <QuestionCardShort 
+                    key={q.id}
+                    question={q.Question}
+                    answer={q.Answer}
+                    setQuestionCounter={setQuestionCounter}
+                  />
+                ))
+              }
+            })
           }
 
           {
-           questionType === 'boolean' && questions?.questions?.length > 0 &&
-            questions.questions.map((q, idx) => (
-              <QuestionCardBoolean
-                key={idx}
-                question={q}
-                answer={questions['answers'][idx]}
-                setQuestionCounter={setQuestionCounter}
-              />
-            ))
+            questionType === 'boolean' && questions.length > 0 &&
+            questions.map((ques, index) => {
+              if(ques?.questions?.length > 0){
+                return ques.questions.map((q, idx) => (
+                  <QuestionCardBoolean
+                  key={idx}
+                  question={q}
+                  answer={questions[index]['answers'][idx]}
+                  setQuestionCounter={setQuestionCounter}
+                />
+                ))
+              }
+            })
           }
         </VStack>
         <Box pos={'absolute'} bottom={2} w='full'>
