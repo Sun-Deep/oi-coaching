@@ -4,7 +4,7 @@ import {BsVolumeDownFill} from 'react-icons/bs'
 import { useRef, useState } from "react"
 import { useSpeechSynthesis } from 'react-speech-kit';
 
-const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
+const QuestionCardShort = ({ question, answer, setQuestionCounter, fontSize }) => {
     const { speak } = useSpeechSynthesis();
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
@@ -44,6 +44,7 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
         borderRadius={'lg'}
         spacing={2}
         w='full'
+        fontSize={`${fontSize}px`}
         border={
             selectedAns === answer ? '3px solid green'
             : (selectedAns !== '' && selectedAns !== answer) ? '3px solid red'

@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useSpeechSynthesis } from 'react-speech-kit';
 import {BsVolumeDownFill} from 'react-icons/bs'
 
-const QuestionCardBoolean = ({ question, answer, setQuestionCounter }) => {
+const QuestionCardBoolean = ({ question, answer, setQuestionCounter, fontSize }) => {
     const { speak } = useSpeechSynthesis();
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
@@ -42,11 +42,13 @@ const QuestionCardBoolean = ({ question, answer, setQuestionCounter }) => {
         borderRadius={'lg'}
         spacing={2}
         w='full'
+        fontSize={`${fontSize}px`}
         border={
             selectedAns === answer ? '3px solid green'
             : (selectedAns !== '' && selectedAns !== answer) ? '3px solid red'
             : ''
         }
+
     >
           <Icon 
             alignSelf={'flex-end'} 
@@ -60,6 +62,7 @@ const QuestionCardBoolean = ({ question, answer, setQuestionCounter }) => {
         <Button
          w='full'
          size={'sm'}
+         fontSize={`${fontSize}px`}
          onClick={() => setAnswer('Yes')}
          textTransform={'capitalize'}
         >
@@ -68,6 +71,7 @@ const QuestionCardBoolean = ({ question, answer, setQuestionCounter }) => {
         <Button
          w='full'
          size={'sm'}
+         fontSize={`${fontSize}px`}
          onClick={() => setAnswer('No')}
          textTransform={'capitalize'}
         >

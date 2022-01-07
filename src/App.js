@@ -2,6 +2,7 @@ import { Box, Button, Flex, Icon, Select, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
+import { BiFontSize } from 'react-icons/bi'
 
 import { ChatBubbleReceived, ChatBubbleSent } from "./components/ChatBubble";
 import ChatHeader from "./components/ChatHeader";
@@ -29,6 +30,7 @@ function App() {
   const [isReport, setIsReport] = useState(false)
   const [isQuestionType, setIsQuestionType] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [fontSizee, setFontSizee] = useState(12)
 
   const handleQuestionType = (event) => {
     setIsLoading(true)
@@ -110,6 +112,29 @@ function App() {
       }
     }
   }, [questionCounter])
+
+  const handleFontSize = () => {
+
+    if(fontSizee < 18){
+      setFontSizee(f => f + 1)
+    }
+  }
+
+  const reset = () => {
+    setChats([])
+    setQuestionType('')
+    setInputText('')
+    setQuestions([])
+    setIsLoading(false)
+    setParagraphs([])
+    setQuestionCounter(0)
+    setParaIndex(0)
+    setTotalQuestions(0)
+    setIsReport(false)
+    setIsQuestionType(false)
+    setIsProcessing(false)
+    setFontSizee(12)
+  }
   
   return (
     <Box
@@ -137,8 +162,8 @@ function App() {
           >
             {
               chats.length > 0 && chats.map((c, idx) => (
-               !!c.sent ?  <ChatBubbleSent key={idx} text={c.sent} /> :
-                <ChatBubbleReceived key={idx} text={c.received} />
+               !!c.sent ?  <ChatBubbleSent fontSize={fontSizee} key={idx} text={c.sent} /> :
+                <ChatBubbleReceived fontSize={fontSizee} key={idx} text={c.received} />
               ))
             }
             { isQuestionType && <Select
@@ -165,6 +190,7 @@ function App() {
                     options={shuffleArray([...q['options'], q.answer])}
                     answer={q.answer}
                     setQuestionCounter={setQuestionCounter}
+                    fontSize={fontSizee}
                   />
                 ))
               }
@@ -182,6 +208,7 @@ function App() {
                     question={q.Question}
                     answer={q.Answer}
                     setQuestionCounter={setQuestionCounter}
+                    fontSize={fontSizee}
                   />
                 ))
               }
@@ -198,6 +225,7 @@ function App() {
                   question={q}
                   answer={questions[index]['answers'][idx]}
                   setQuestionCounter={setQuestionCounter}
+                  fontSize={fontSizee}
                 />
                 ))
               }
@@ -205,23 +233,45 @@ function App() {
           }
         </VStack>
         <Box pos={'absolute'} bottom={2} w='full'>
-        <TextBox 
-          // isLoading={isLoading} 
-          getQuestion={getParagraphs} 
-          handleInputText={handleInputText}
-          inputText={inputText}
+          <TextBox 
+            getQuestion={getParagraphs} 
+            handleInputText={handleInputText}
+            inputText={inputText}
+          />
+          <Flex alignItems={'center'} gridGap={3}>
+          <Button
+            size={'xs'}
+            bgColor={'#4dd4b9'}
+            color={'black'}
+            boxShadow={'lg'}
+            ml={2}
+            onClick={() => setIsReport(true)}
+          >
+            Show Report
+          </Button>
+
+        
+        <Icon
+          as={BiFontSize} 
+          w={6}
+          h={6}
+          justifyItems={'flex-end'}
+          cursor={'pointer'}
+          onClick={handleFontSize}
         />
 
         <Button
-          size={'sm'}
-          bgColor={'#4dd4b9'}
-          color={'black'}
+          size={'xs'}
+          bgColor={'red'}
+          color={'white'}
           boxShadow={'lg'}
           ml={2}
-          onClick={() => setIsReport(true)}
+          onClick={reset}
         >
-          Show Report
+          Reset
         </Button>
+          </Flex>
+          
         </Box>
         
       </Box> :
