@@ -102,7 +102,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(questions)
     if(totalQuestions > 0){
       let per = (questionCounter / (totalQuestions))
       console.log({per})
@@ -111,9 +110,6 @@ function App() {
       }
     }
   }, [questionCounter])
-
-console.log({questionCounter})
-console.log({totalQuestions})
   
   return (
     <Box
