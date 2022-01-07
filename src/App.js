@@ -25,6 +25,7 @@ function App() {
   const [paragraphs, setParagraphs] = useState([])
   const [questionCounter, setQuestionCounter] = useState(0)
   const [paraIndex, setParaIndex] = useState(0)
+  const [totalQuestions, setTotalQuestions] = useState(0)
   const [isReport, setIsReport] = useState(false)
   const [isQuestionType, setIsQuestionType] = useState(false)
 
@@ -63,12 +64,13 @@ function App() {
     console.log(questions)
     setQuestions((questions) => {
       if(questions.length > 0){
-        return setQuestions([...questions.questions, res.data])
+        return [...questions, res.data]
       }else{
-        setQuestions(res.data)
+        return [res.data]
       }
-      setParaIndex(idx => idx + 1)
     })
+    setTotalQuestions(value => value + res?.data?.questions?.length)
+    setParaIndex(idx => idx + 1)
   }
 
   const getQuestions = (questionType) => {
@@ -94,16 +96,17 @@ function App() {
   }
 
   useEffect(() => {
-    if(questions.length > 0){
-      let per = (questionCounter / (questions.length))
-      console.log(per)
+    if(totalQuestions > 0){
+      let per = (questionCounter / (totalQuestions))
+      console.log({per})
       if(per >= 0.6){
         getQuestions(questionType)
       }
     }
   }, [questionCounter])
 
-console.log(questionCounter)
+console.log({questionCounter})
+console.log({totalQuestions})
   
   return (
     <Box
@@ -147,8 +150,25 @@ console.log(questionCounter)
             </Select>}
             { isLoading && <ChatLoading />}
           </VStack>
-        
+
           {
+            questionType === 'mcq' && questions.length > 0 &&
+            questions.map(ques => {
+              if(ques?.questions?.length > 0){
+                return ques.questions.map((q, idx) => (
+                  <QuestionCardMCQ
+                    key={idx}
+                    question={q.question_statement}
+                    options={shuffleArray([...q['options'], q.answer])}
+                    answer={q.answer}
+                    setQuestionCounter={setQuestionCounter}
+                  />
+                ))
+              }
+            })
+          }
+        
+          {/* {
            questionType === 'mcq' &&  questions?.questions?.length > 0 && 
             questions.questions.map((q, idx) => (
               <QuestionCardMCQ
@@ -159,7 +179,7 @@ console.log(questionCounter)
                 setQuestionCounter={setQuestionCounter}
               />
             ))
-          }
+          } */}
 
           {
            questionType === 'short_question' &&  questions?.questions?.length > 0 &&
