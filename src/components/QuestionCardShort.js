@@ -1,9 +1,11 @@
-import { Button, Flex, Input, Text, VStack } from "@chakra-ui/react"
+import { Button, Flex, Icon, Input, Text, VStack } from "@chakra-ui/react"
 import Swal from 'sweetalert2'
+import {BsVolumeDownFill} from 'react-icons/bs'
 import { useRef, useState } from "react"
+import { useSpeechSynthesis } from 'react-speech-kit';
 
 const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
-
+    const { speak } = useSpeechSynthesis();
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
     const [attempt, setAttempt] = useState(0)
@@ -48,6 +50,14 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
             : ''
         }
     >
+        <Icon 
+            alignSelf={'flex-end'} 
+            as={BsVolumeDownFill} 
+            cursor={'pointer'}
+            w={6}
+            h={6}
+            onClick={() => speak({ text: question })}
+        />
         <Text>{question}</Text>
 
         <Flex gridGap={2} w='full' alignItems={'center'}>
