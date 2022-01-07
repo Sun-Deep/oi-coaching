@@ -2,12 +2,17 @@ import { Button, Text, VStack } from "@chakra-ui/react"
 import Swal from 'sweetalert2'
 import { useState } from "react"
 
-const QuestionCardBoolean = ({ question, answer }) => {
+const QuestionCardBoolean = ({ question, answer, setQuestionCounter }) => {
 
     const [selectedAns, setSelectedAns] = useState('')
+    const [isAnswered, setIsAnswered] = useState(false)
 
     const setAnswer = (value) => {
         setSelectedAns(value)
+        if(!isAnswered){
+            setQuestionCounter(c => c + 1)
+            setIsAnswered(true)
+        }
         if(value === answer){
             Swal.fire({
                 icon: 'success',
@@ -16,6 +21,7 @@ const QuestionCardBoolean = ({ question, answer }) => {
                 timer: 1500,
                 width: '320px'
               })
+
         }else{
             Swal.fire({
                 icon: 'error',

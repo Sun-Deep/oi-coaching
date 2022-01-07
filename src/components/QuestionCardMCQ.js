@@ -3,12 +3,17 @@ import Swal from 'sweetalert2'
 
 import { useState } from "react"
 
-const QuestionCard = ({ question, options, answer }) => {
+const QuestionCard = ({ question, options, answer, setQuestionCounter }) => {
 
     const [selectedAns, setSelectedAns] = useState('')
+    const [isAnswered, setIsAnswered] = useState(false)
 
     const setAnswer = (value) => {
         setSelectedAns(value)
+        if(!isAnswered){
+            setQuestionCounter(c => c + 1)
+            setIsAnswered(true)
+        }
         if(value === answer){
             Swal.fire({
                 icon: 'success',

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Select, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import { HiArrowLeft } from 'react-icons/hi'
@@ -17,75 +17,93 @@ import shuffleArray from "./helper/shuffleArray";
 
 function App() {
 
-  // const [convStarter, setConvStarter] = useState([
-  //   '',
-  //   'Hi, I am OTTO. Your friend and personal learning partner.',
-  //   'I can ask you questions, help your revise and test your knowledge.',
-  //   'You can start by selecting a question type from the top.',
-  //   'And paste  the link or the text of your learning material into the text box below.'
-  // ])
-
   const [chats, setChats] = useState([])
-  // const [convStarterIndex, setConvStarterIndex] = useState(0)
   const [questionType, setQuestionType] = useState('')
   const [inputText, setInputText] = useState('')
   const [questions, setQuestions] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [paragraphs, setParagraphs] = useState([])
+  const [questionCounter, setQuestionCounter] = useState(0)
+  const [paraIndex, setParaIndex] = useState(0)
   const [isReport, setIsReport] = useState(false)
-
-  // useEffect(() => {
-  //   if(convStarterIndex < 4){
-  //     setTimeout(() => {
-  //       setConvStarterIndex(idx => idx + 1)
-  //     }, 2000)
-  //   }
-    
-  // }, [convStarterIndex])
+  const [isQuestionType, setIsQuestionType] = useState(false)
 
   const handleQuestionType = (event) => {
+    setIsLoading(true)
+    setQuestions('')
     setQuestionType(event.target.value)
-    setQuestions([])
-    setInputText('')
+    getQuestions(event.target.value)
   }
 
   const handleInputText = (event) => {
     setInputText(event.target.value)
   }
 
-  const getQuestion = (event) => {
+  const getParagraphs = (event) => {
     if(event){
       event.preventDefault()
     }
     setIsLoading(true)
     setChats([...chats, { sent: inputText}])
-    getResponse(inputText).then(res => {
-      if(res?.data?.paragraph){
+    getResponse(inputText).then(async (res) => {
+      if(res?.data?.paragraphs){
+        let para = res?.data?.paragraphs
+        setParagraphs(para)
         setIsLoading(false)
-
+        setIsQuestionType(true)
       }else{
         setChats([...chats, {sent: inputText}, { received: res?.data?.response}])
         setIsLoading(false)
-
       }
       setInputText('')
     })
-    // if(questionType === 'boolean'){
-    //   postBoolean(inputText).then(response => {
-    //     setQuestions(response.data)
-    //     setIsLoading(false)
-    //   })
-    // }else if(questionType === 'mcq'){
-    //   postMCQ(inputText).then((response) => {
-    //     setQuestions(response.data)
-    //     setIsLoading(false)
-    //   })
-    // }else if(questionType === 'short_question'){
-    //   postShortQuestion(inputText).then(response => {
-    //     setQuestions(response.data)
-    //     setIsLoading(false)
-    //   })
-    // }
   }
+
+  const populateQuestions = (res) => {
+    console.log(questions)
+    setQuestions((questions) => {
+      if(questions.length > 0){
+        return setQuestions([...questions.questions, res.data])
+      }else{
+        setQuestions(res.data)
+      }
+      setParaIndex(idx => idx + 1)
+    })
+  }
+
+  const getQuestions = (questionType) => {
+    if(paraIndex <= paragraphs.length){
+      if(questionType === 'boolean'){
+        postBoolean(paragraphs[paraIndex]).then(res => {
+          setIsLoading(false)
+          populateQuestions(res)
+        })  
+      }else if(questionType === 'mcq'){
+        postMCQ(paragraphs[paraIndex]).then(res => {
+          setIsLoading(false)
+          populateQuestions(res)
+        })  
+      }else if(questionType === 'short_question'){
+        postShortQuestion(paragraphs[paraIndex]).then(res => {
+          setIsLoading(false)
+          populateQuestions(res)
+        })  
+      }
+    }
+    
+  }
+
+  useEffect(() => {
+    if(questions.length > 0){
+      let per = (questionCounter / (questions.length))
+      console.log(per)
+      if(per >= 0.6){
+        getQuestions(questionType)
+      }
+    }
+  }, [questionCounter])
+
+console.log(questionCounter)
   
   return (
     <Box
@@ -117,39 +135,52 @@ function App() {
                 <ChatBubbleReceived key={idx} text={c.received} />
               ))
             }
+            { isQuestionType && <Select
+                placeholder="Select Question Type"
+                border={'2px solid'}
+                onChange={handleQuestionType}
+                value={questionType}
+            >
+                <option value={'boolean'}>Boolean (True or False)</option>
+                <option value={'mcq'}>MCQ</option>
+                <option value={'short_question'}>Short Question</option>
+            </Select>}
             { isLoading && <ChatLoading />}
           </VStack>
         
           {
-            questionType === 'mcq' && questions?.questions?.length > 0 && 
+           questionType === 'mcq' &&  questions?.questions?.length > 0 && 
             questions.questions.map((q, idx) => (
               <QuestionCardMCQ
                 key={idx}
                 question={q.question_statement}
                 options={shuffleArray([...q['options'], q.answer])}
                 answer={q.answer}
+                setQuestionCounter={setQuestionCounter}
               />
             ))
           }
 
           {
-            questionType === 'short_question' && questions?.questions?.length > 0 &&
+           questionType === 'short_question' &&  questions?.questions?.length > 0 &&
             questions.questions.map((q) => (
               <QuestionCardShort 
                 key={q.id}
                 question={q.Question}
                 answer={q.Answer}
+                setQuestionCounter={setQuestionCounter}
               />
             ))
           }
 
           {
-            questionType === 'boolean' && questions?.questions?.length > 0 &&
+           questionType === 'boolean' && questions?.questions?.length > 0 &&
             questions.questions.map((q, idx) => (
               <QuestionCardBoolean
                 key={idx}
                 question={q}
                 answer={questions['answers'][idx]}
+                setQuestionCounter={setQuestionCounter}
               />
             ))
           }
@@ -157,7 +188,7 @@ function App() {
         <Box pos={'absolute'} bottom={2} w='full'>
         <TextBox 
           // isLoading={isLoading} 
-          getQuestion={getQuestion} 
+          getQuestion={getParagraphs} 
           handleInputText={handleInputText}
           inputText={inputText}
         />

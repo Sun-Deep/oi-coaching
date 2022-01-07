@@ -2,14 +2,20 @@ import { Button, Flex, Input, Text, VStack } from "@chakra-ui/react"
 import Swal from 'sweetalert2'
 import { useRef, useState } from "react"
 
-const QuestionCardShort = ({ question, answer }) => {
+const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
 
     const [selectedAns, setSelectedAns] = useState('')
+    const [isAnswered, setIsAnswered] = useState(false)
+
 
     const ansRef = useRef()
 
     const setAnswer = () => {
         setSelectedAns(ansRef.current.value)
+        if(!isAnswered){
+            setQuestionCounter(c => c + 1)
+            setIsAnswered(true)
+        }
         if(ansRef.current.value === answer){
             Swal.fire({
                 icon: 'success',
