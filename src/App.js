@@ -106,7 +106,7 @@ function App() {
     if(totalQuestions > 0){
       let per = (questionCounter / (totalQuestions))
       console.log({per})
-      if(per >= 0.6){
+      if(per >= 0.3){
         getQuestions(questionType)
       }
     }

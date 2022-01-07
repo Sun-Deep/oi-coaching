@@ -7,7 +7,6 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter }) => {
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
 
-
     const ansRef = useRef()
 
     const setAnswer = () => {
