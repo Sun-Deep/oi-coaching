@@ -28,6 +28,7 @@ function App() {
   const [totalQuestions, setTotalQuestions] = useState(0)
   const [isReport, setIsReport] = useState(false)
   const [isQuestionType, setIsQuestionType] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
 
   const handleQuestionType = (event) => {
     setIsLoading(true)
@@ -74,21 +75,25 @@ function App() {
   }
 
   const getQuestions = (questionType) => {
-    if(paraIndex <= paragraphs.length){
-      
+    if(paraIndex <= paragraphs.length && !isProcessing){
+      setIsProcessing(true)
       if(questionType === 'boolean'){
         postBoolean(paragraphs[paraIndex]).then(res => {
           setIsLoading(false)
+          setIsProcessing(false)
           populateQuestions(res)
+         
         })  
       }else if(questionType === 'mcq'){
         postMCQ(paragraphs[paraIndex]).then(res => {
           setIsLoading(false)
+          setIsProcessing(false)
           populateQuestions(res)
         })  
       }else if(questionType === 'short_question'){
         postShortQuestion(paragraphs[paraIndex]).then(res => {
           setIsLoading(false)
+          setIsProcessing(false)
           populateQuestions(res)
         })  
       }
