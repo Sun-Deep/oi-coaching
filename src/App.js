@@ -30,6 +30,7 @@ function App() {
   const [isQuestionType, setIsQuestionType] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [fontSizee, setFontSizee] = useState(12)
+  const [color, setColor] = useState('light')
 
   const handleQuestionType = (event) => {
     setIsLoading(true)
@@ -134,7 +135,13 @@ function App() {
     setIsProcessing(false)
     setFontSizee(12)
   }
+
+  const handleColorChange = (event) => {
+    setColor(event.target.value)
+  }
   
+  console.log(color)
+
   return (
     <Box
       boxShadow={'md'}
@@ -258,6 +265,13 @@ function App() {
           cursor={'pointer'}
           onClick={handleFontSize}
         />
+
+        <Select size={'xs'} w='35' onChange={handleColorChange}>
+          <option value={'light'}>Light</option>
+          <option value={'dark'}>Dark</option>
+          <option value={'pink'}>Pink</option>
+          <option value={'yellow'}>Yellow</option>
+        </Select>
 
         <Button
           size={'xs'}
