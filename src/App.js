@@ -168,8 +168,18 @@ function App() {
           >
             {
               chats.length > 0 && chats.map((c, idx) => (
-               !!c.sent ?  <ChatBubbleSent fontSize={fontSizee} key={idx} text={c.sent} /> :
-                <ChatBubbleReceived fontSize={fontSizee} key={idx} text={c.received} />
+               !!c.sent ?  <ChatBubbleSent 
+                color={color} 
+                fontSize={fontSizee} 
+                key={idx} 
+                text={c.sent} 
+              /> :
+                <ChatBubbleReceived 
+                  color={color} 
+                  fontSize={fontSizee} 
+                  key={idx} 
+                  text={c.received} 
+                />
               ))
             }
             { isQuestionType && <Select
