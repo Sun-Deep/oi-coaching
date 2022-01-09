@@ -3,8 +3,16 @@ import Swal from 'sweetalert2'
 import { useSpeechSynthesis } from 'react-speech-kit';
 import {BsVolumeDownFill} from 'react-icons/bs'
 import { useState } from "react"
+import { COLOR } from "../constants/color";
 
-const QuestionCard = ({ question, options, answer, setQuestionCounter, fontSize }) => {
+const QuestionCard = ({ 
+    question, 
+    options, 
+    answer, 
+    setQuestionCounter, 
+    fontSize,
+    color
+}) => {
     const { speak } = useSpeechSynthesis();
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
@@ -36,6 +44,8 @@ const QuestionCard = ({ question, options, answer, setQuestionCounter, fontSize 
 
     return <VStack
         p={2}
+        bgColor={`${COLOR[color].bg}`}
+        color={COLOR[color].color}
         boxShadow={'md'}
         borderRadius={'lg'}
         spacing={2}
@@ -53,7 +63,7 @@ const QuestionCard = ({ question, options, answer, setQuestionCounter, fontSize 
             cursor={'pointer'}
             w={6}
             h={6}
-            onClick={() => speak({ text: question })}
+            onClick={() => speak({ text: question + options.join(',') })}
         />
         <Text>{question}</Text>
 
@@ -66,7 +76,10 @@ const QuestionCard = ({ question, options, answer, setQuestionCounter, fontSize 
                     fontSize={`${fontSize}px`}
                     key={idx}
                     textTransform={'capitalize'}
+                    bgColor={`${COLOR[color].bg}`}
+                    color={COLOR[color].color}
                     onClick={() => setAnswer(op)}
+                    boxShadow={'lg'}
                 >
                     {op}
                 </Button>

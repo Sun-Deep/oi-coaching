@@ -3,8 +3,15 @@ import Swal from 'sweetalert2'
 import { useState } from "react"
 import { useSpeechSynthesis } from 'react-speech-kit';
 import {BsVolumeDownFill} from 'react-icons/bs'
+import { COLOR } from "../constants/color";
 
-const QuestionCardBoolean = ({ question, answer, setQuestionCounter, fontSize }) => {
+const QuestionCardBoolean = ({ 
+    question, 
+    answer, 
+    setQuestionCounter, 
+    fontSize,
+    color
+}) => {
     const { speak } = useSpeechSynthesis();
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
@@ -48,6 +55,8 @@ const QuestionCardBoolean = ({ question, answer, setQuestionCounter, fontSize })
             : (selectedAns !== '' && selectedAns !== answer) ? '3px solid red'
             : ''
         }
+        bgColor={`${COLOR[color].bg}`}
+        color={COLOR[color].color}
 
     >
           <Icon 
@@ -65,6 +74,9 @@ const QuestionCardBoolean = ({ question, answer, setQuestionCounter, fontSize })
          fontSize={`${fontSize}px`}
          onClick={() => setAnswer('Yes')}
          textTransform={'capitalize'}
+         bgColor={`${COLOR[color].bg}`}
+         color={COLOR[color].color}
+         boxShadow={'lg'}
         >
            Yes
         </Button>
@@ -74,6 +86,9 @@ const QuestionCardBoolean = ({ question, answer, setQuestionCounter, fontSize })
          fontSize={`${fontSize}px`}
          onClick={() => setAnswer('No')}
          textTransform={'capitalize'}
+         bgColor={`${COLOR[color].bg}`}
+         color={COLOR[color].color}
+         boxShadow={'lg'}
         >
            No
         </Button>

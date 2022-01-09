@@ -3,8 +3,15 @@ import Swal from 'sweetalert2'
 import {BsVolumeDownFill} from 'react-icons/bs'
 import { useRef, useState } from "react"
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { COLOR } from "../constants/color";
 
-const QuestionCardShort = ({ question, answer, setQuestionCounter, fontSize }) => {
+const QuestionCardShort = ({ 
+    question, 
+    answer, 
+    setQuestionCounter, 
+    fontSize,
+    color
+}) => {
     const { speak } = useSpeechSynthesis();
     const [selectedAns, setSelectedAns] = useState('')
     const [isAnswered, setIsAnswered] = useState(false)
@@ -40,6 +47,8 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter, fontSize }) =
 
     return <VStack
         p={2}
+        bgColor={`${COLOR[color].bg}`}
+        color={COLOR[color].color}
         boxShadow={'md'}
         borderRadius={'lg'}
         spacing={2}
@@ -65,10 +74,13 @@ const QuestionCardShort = ({ question, answer, setQuestionCounter, fontSize }) =
             <Input 
                 borderRadius={'lg'}
                 ref={ansRef}
+                bgColor={'whitesmoke'}
             />
             <Button 
                 size={'sm'}
                 onClick={setAnswer}
+                bgColor={`${COLOR[color].bg}`}
+                color={COLOR[color].color}
             >
                 Send
             </Button>

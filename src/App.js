@@ -207,6 +207,7 @@ function App() {
                     answer={q.answer}
                     setQuestionCounter={setQuestionCounter}
                     fontSize={fontSizee}
+                    color={color}
                   />
                 ))
               }
@@ -225,6 +226,7 @@ function App() {
                     answer={q.Answer}
                     setQuestionCounter={setQuestionCounter}
                     fontSize={fontSizee}
+                    color={color}
                   />
                 ))
               }
@@ -242,6 +244,7 @@ function App() {
                   answer={questions[index]['answers'][idx]}
                   setQuestionCounter={setQuestionCounter}
                   fontSize={fontSizee}
+                  color={color}
                 />
                 ))
               }
