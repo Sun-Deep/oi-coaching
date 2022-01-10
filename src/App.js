@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Select, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Image, Select, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { BiFontSize } from 'react-icons/bi'
@@ -113,10 +113,15 @@ function App() {
     }
   }, [questionCounter])
 
-  const handleFontSize = () => {
-
+  const increaseFontSize = () => {
     if(fontSizee < 18){
       setFontSizee(f => f + 1)
+    }
+  }
+
+  const decreaseFontSize = () => {
+    if(fontSizee > 12){
+      setFontSizee(f => f - 1)
     }
   }
 
@@ -269,15 +274,16 @@ function App() {
             Show Report
           </Button>
 
-        
-        <Icon
-          as={BiFontSize} 
-          w={6}
-          h={6}
-          justifyItems={'flex-end'}
-          cursor={'pointer'}
-          onClick={handleFontSize}
-        />
+          <Image 
+            src="/font_plus.svg" 
+            cursor={'pointer'}
+            onClick={increaseFontSize}
+          />
+          <Image 
+            src="/font_minus.svg" 
+            cursor={'pointer'}
+            onClick={decreaseFontSize}
+          />
 
         <Select size={'xs'} w='35' onChange={handleColorChange}>
           <option value={'light'}>Light</option>
