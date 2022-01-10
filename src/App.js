@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, Image, Select, VStack } from "@chakra-ui/react";
+import { Box, Button, calc, Flex, Icon, Image, Select, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { BiFontSize } from 'react-icons/bi'
@@ -151,17 +151,19 @@ function App() {
   return (
     <Box
       boxShadow={'md'}
-      h='670px'
-      w='450px'
+      h={['95%', '90%', '670px']}
+      w={['full', 'full', '450px']}
       mx={'auto'}
       borderRadius={'lg'}
       pos={'relative'}
     >
       {
-        !isReport ? <Box>
+        !isReport ? <Box height={'100%'}>
         <ChatHeader />
         <VStack
-          h='444px'
+        style={{
+          height: 'calc(100% - 180px)'
+        }}
           p={2}
           overflowY={'scroll'}
           spacing={5}

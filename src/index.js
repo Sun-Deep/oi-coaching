@@ -12,8 +12,8 @@ ReactDOM.render(
     <Box display={['none', 'none', 'none', 'block']} w='250px' pos={'absolute'} top={0} left={10}>
         <Image objectFit={'contain'} src="/logo.png" />
       </Box>
-      <Flex mx={2} h='100vh' alignItems={'center'}>
-      <App />
+      <Flex mx={2} h='96vh' alignItems={'center'}>
+        <App />
       </Flex>
      
       <Text
@@ -21,7 +21,7 @@ ReactDOM.render(
         fontSize="10px"
         pos={'absolute'}
         right={2}
-        bottom={2}
+        bottom={-5}
       >
         Confindential. Do Not Share. All IP belongs to Otermans Institute 2021.
       </Text>
