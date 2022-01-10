@@ -13,6 +13,7 @@ import { getResponse, postBoolean, postMCQ, postShortQuestion } from "./services
 import QuestionCardBoolean from "./components/QuestionCardBoolean";
 import shuffleArray from "./helper/shuffleArray";
 import Report from "./components/Report";
+import BottomAction from "./components/BottomAction";
 
 
 function App() {
@@ -262,48 +263,14 @@ function App() {
             handleInputText={handleInputText}
             inputText={inputText}
           />
-          <Flex alignItems={'center'} gridGap={3}>
-          <Button
-            size={'xs'}
-            bgColor={'#4dd4b9'}
-            color={'black'}
-            boxShadow={'lg'}
-            ml={2}
-            onClick={() => setIsReport(true)}
-          >
-            Show Report
-          </Button>
 
-          <Image 
-            src="/font_plus.svg" 
-            cursor={'pointer'}
-            onClick={increaseFontSize}
-          />
-          <Image 
-            src="/font_minus.svg" 
-            cursor={'pointer'}
-            onClick={decreaseFontSize}
-          />
-
-        <Select size={'xs'} w='35' onChange={handleColorChange}>
-          <option value={'light'}>Light</option>
-          <option value={'dark'}>Dark</option>
-          <option value={'pink'}>Pink</option>
-          <option value={'yellow'}>Yellow</option>
-        </Select>
-
-        <Button
-          size={'xs'}
-          bgColor={'red'}
-          color={'white'}
-          boxShadow={'lg'}
-          ml={2}
-          onClick={reset}
-        >
-          Reset
-        </Button>
-          </Flex>
-          
+         <BottomAction 
+          decreaseFontSize={decreaseFontSize}
+          increaseFontSize={increaseFontSize}
+          reset={reset}
+          handleColorChange={handleColorChange}
+          setIsReport={setIsReport}
+         />
         </Box>
         
       </Box> : <Report setIsReport={setIsReport} />
