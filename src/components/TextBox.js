@@ -1,7 +1,7 @@
 import { Flex, FormControl, Icon, Input, Spinner } from "@chakra-ui/react"
 import { MdSend } from 'react-icons/md'
 
-const TextBox = ({ handleInputText, getQuestion, isLoading, inputText }) => {
+const TextBox = ({ handleInputText, getQuestion, isLoading, inputText, background }) => {
 
     return <Flex p={2} alignItems={'center'} gridGap={3}>
         <FormControl isRequired>
@@ -12,6 +12,7 @@ const TextBox = ({ handleInputText, getQuestion, isLoading, inputText }) => {
                     borderColor={'#00B589'}
                     onChange={handleInputText}
                     value={inputText}
+                    color={background === 'dark' ? 'white' : 'black'}
                 />
             </form>
 

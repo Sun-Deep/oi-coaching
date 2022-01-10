@@ -20,3 +20,8 @@ export const COLOR = {
         color: '#000000'
     },
 }
+
+export const BG_COLOR = {
+    light_one: '#5CDD8D',
+    dark: '#03263A'
+}

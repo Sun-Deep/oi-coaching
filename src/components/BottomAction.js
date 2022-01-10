@@ -1,43 +1,61 @@
-import { Button, Flex, Image, Select } from "@chakra-ui/react"
+import { Button, Flex, Icon, Image, Select } from "@chakra-ui/react"
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs"
 
 const BottomAction = ({
     increaseFontSize, 
     decreaseFontSize , 
     handleColorChange, 
     reset,
-    setIsReport 
+    setIsReport,
+    background,
+    handleBackground
 }) => {
     return  <Flex alignItems={'center'} gridGap={3}>
         <Button
-        size={'xs'}
-        bgColor={'#4dd4b9'}
-        color={'black'}
-        boxShadow={'lg'}
-        ml={2}
-        onClick={() => setIsReport(true)}
+            size={'xs'}
+            bgColor={'#4dd4b9'}
+            color={'black'}
+            boxShadow={'lg'}
+            ml={2}
+            onClick={() => setIsReport(true)}
         >
-        Show Report
+            Show Report
         </Button>
 
         <Image 
-            src="/font_plus.svg" 
+            src={background === 'dark' ? '/font_plus_white.svg' : '/font_plus.svg'}
             cursor={'pointer'}
             onClick={increaseFontSize}
         />
         <Image 
-            src="/font_minus.svg" 
+            src={background === 'dark' ? '/font_minus_white.svg' : '/font_minus.svg'}
             cursor={'pointer'}
             onClick={decreaseFontSize}
         />
 
-        <Select size={'xs'} w='35' onChange={handleColorChange}>
-            <option value={'light'}>Light 1</option>
+        <Select size={'xs'} w='35' onChange={handleColorChange} color={background === 'dark' ? 'white' : 'black'}>
+            { 
+                background !== 'light_one' &&  <option value={'light'}>Light 1</option>
+            }
             <option value={'light_two'}>Light 2</option>
-            <option value={'dark'}>Dark</option>
+            {
+                background !== 'dark' && <option value={'dark'}>Dark</option>
+            }
             <option value={'pink'}>Pink</option>
             <option value={'yellow'}>Yellow</option>
         </Select>
-
+        {
+            background === 'light_one' ? <Icon 
+                as={BsFillMoonFill} 
+                onClick={() => handleBackground('dark')}
+            />
+            : <Icon 
+                as={BsFillSunFill} 
+                onClick={() => handleBackground('light_one')}
+                color='white'
+            />
+        }
+        
         <Button
             size={'xs'}
             bgColor={'red'}

@@ -14,6 +14,7 @@ import QuestionCardBoolean from "./components/QuestionCardBoolean";
 import shuffleArray from "./helper/shuffleArray";
 import Report from "./components/Report";
 import BottomAction from "./components/BottomAction";
+import { BG_COLOR } from "./constants/color";
 
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
   const [isQuestionType, setIsQuestionType] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [fontSizee, setFontSizee] = useState(12)
-  const [color, setColor] = useState('light')
+  const [color, setColor] = useState('light_two')
+  const [background, setBackground] = useState('light_one')
 
   const handleQuestionType = (event) => {
     setIsLoading(true)
@@ -145,6 +147,13 @@ function App() {
   const handleColorChange = (event) => {
     setColor(event.target.value)
   }
+
+  const handleBackground = (bg) => {
+    setBackground(bg)
+    if(bg === 'light_one' || 'light_two'){
+      setColor('light_two')
+    }
+  }
   
   console.log(color)
 
@@ -156,6 +165,7 @@ function App() {
       mx={'auto'}
       borderRadius={'lg'}
       pos={'relative'}
+      bgColor={BG_COLOR[background]}
     >
       {
         !isReport ? <Box height={'100%'}>
@@ -264,6 +274,7 @@ function App() {
             getQuestion={getParagraphs} 
             handleInputText={handleInputText}
             inputText={inputText}
+            background={background}
           />
 
          <BottomAction 
@@ -272,6 +283,8 @@ function App() {
           reset={reset}
           handleColorChange={handleColorChange}
           setIsReport={setIsReport}
+          background={background}
+          handleBackground={handleBackground}
          />
         </Box>
         
