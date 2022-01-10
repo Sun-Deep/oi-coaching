@@ -3,6 +3,10 @@ export const COLOR = {
         bg: '#5CDD8D',
         color: '#000000'
     },
+    light_two: {
+        bg: '#FFB6C1',
+        color: '#000000'
+    },
     dark: {
         bg: '#03263A',
         color: '#F1F1F1'

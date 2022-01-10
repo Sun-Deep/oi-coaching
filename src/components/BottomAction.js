@@ -31,7 +31,8 @@ const BottomAction = ({
         />
 
         <Select size={'xs'} w='35' onChange={handleColorChange}>
-            <option value={'light'}>Light</option>
+            <option value={'light'}>Light 1</option>
+            <option value={'light_two'}>Light 2</option>
             <option value={'dark'}>Dark</option>
             <option value={'pink'}>Pink</option>
             <option value={'yellow'}>Yellow</option>
