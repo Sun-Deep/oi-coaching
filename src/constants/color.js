@@ -22,6 +22,6 @@ export const COLOR = {
 }
 
 export const BG_COLOR = {
-    light_one: '#5CDD8D',
+    light_one: '#FFFFFF',
     dark: '#03263A'
 }

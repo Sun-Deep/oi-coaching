@@ -32,7 +32,7 @@ function App() {
   const [isQuestionType, setIsQuestionType] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [fontSizee, setFontSizee] = useState(12)
-  const [color, setColor] = useState('light_two')
+  const [color, setColor] = useState('light')
   const [background, setBackground] = useState('light_one')
 
   const handleQuestionType = (event) => {
@@ -151,7 +151,7 @@ function App() {
   const handleBackground = (bg) => {
     setBackground(bg)
     if(bg === 'light_one' || 'light_two'){
-      setColor('light_two')
+      setColor('light')
     }
   }
   

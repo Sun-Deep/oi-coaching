@@ -34,9 +34,10 @@ const BottomAction = ({
         />
 
         <Select size={'xs'} w='35' onChange={handleColorChange} color={background === 'dark' ? 'white' : 'black'}>
-            { 
+            {/* { 
                 background !== 'light_one' &&  <option value={'light'}>Light 1</option>
-            }
+            } */}
+            <option value={'light'}>Light 1</option>
             <option value={'light_two'}>Light 2</option>
             {
                 background !== 'dark' && <option value={'dark'}>Dark</option>
